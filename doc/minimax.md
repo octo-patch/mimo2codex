@@ -41,13 +41,13 @@ In `~/.mimo2codex/providers.json`:
   "providers": [
     {
       "id": "minimax",
-      "displayName": "MiniMax M3",
+      "displayName": "MiniMax M3.1 Flash",
       "baseUrl": "https://api.minimax.io/v1",
       "envKey": "MINIMAX_API_KEY",
-      "defaultModel": "MiniMax-M3",
+      "defaultModel": "MiniMax-M3.1-Flash",
       "models": [
-        { "id": "MiniMax-M3", "contextWindow": 1000000 },
-        { "id": "MiniMax-M2.7", "contextWindow": 204800 }
+        { "id": "MiniMax-M3.1-Flash", "contextWindow": 1000000, "supportsImages": true },
+        { "id": "MiniMax-M3", "contextWindow": 1000000, "supportsImages": true }
       ],
       "features": { "minimaxCompat": true, "forceParallelToolCalls": true }
     }
@@ -55,7 +55,7 @@ In `~/.mimo2codex/providers.json`:
 }
 ```
 
-The same preset also matches `https://api.minimaxi.com/v1`. `MiniMax-M3` is the 1,000,000-token default; keep `MiniMax-M2.7` if you still need the 204,800-token catalog entry.
+`MiniMax-M3.1-Flash` and `MiniMax-M3` both have 1,000,000-token context windows and accept text, image, and video input. Use `https://api.minimax.io/v1` or `https://api.minimaxi.com/v1` for OpenAI-compatible requests. The corresponding Anthropic-compatible endpoints are `https://api.minimax.io/anthropic` and `https://api.minimaxi.com/anthropic`; mimo2codex itself expects the OpenAI-compatible endpoints.
 
 Then:
 ```bash
@@ -72,14 +72,14 @@ If MiniMax is the only upstream you need:
 ```bash
 export GENERIC_BASE_URL=https://api.minimax.io/v1
 export GENERIC_API_KEY=<your_key>
-export GENERIC_DEFAULT_MODEL=MiniMax-M3
-export GENERIC_FORCE_DEFAULT_MODEL=1   # key bit: unknown client models (e.g. "gpt-5.5") rewrite to MiniMax-M3
+export GENERIC_DEFAULT_MODEL=MiniMax-M3.1-Flash
+export GENERIC_FORCE_DEFAULT_MODEL=1   # key bit: unknown client models (e.g. "gpt-5.5") rewrite to MiniMax-M3.1-Flash
 mimo2codex
 ```
 
 ⚠️ **The env-var path cannot carry `features.minimaxCompat`** — switch to providers.json if you need the strict-mode sanitizers.
 
-Need the 204,800-token `MiniMax-M2.7` catalog entry instead? Use providers.json and set the model id there.
+Use providers.json to expose both current models in the catalog and their image-input metadata.
 
 ## Field reference
 

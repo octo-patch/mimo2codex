@@ -277,13 +277,13 @@ MiniMax 拒绝若干 OpenAI / MiMo / DeepSeek 都接受的字段。开 `minimaxC
 ```json
 {
   "id": "minimax",
-  "displayName": "MiniMax M3",
+  "displayName": "MiniMax M3.1 Flash",
   "baseUrl": "https://api.minimax.io/v1",
   "envKey": "MINIMAX_API_KEY",
-  "defaultModel": "MiniMax-M3",
+  "defaultModel": "MiniMax-M3.1-Flash",
   "models": [
-    { "id": "MiniMax-M3", "contextWindow": 1000000 },
-    { "id": "MiniMax-M2.7", "contextWindow": 204800 }
+    { "id": "MiniMax-M3.1-Flash", "contextWindow": 1000000, "supportsImages": true },
+    { "id": "MiniMax-M3", "contextWindow": 1000000, "supportsImages": true }
   ],
   "features": {
     "minimaxCompat": true,
@@ -292,7 +292,7 @@ MiniMax 拒绝若干 OpenAI / MiMo / DeepSeek 都接受的字段。开 `minimaxC
 }
 ```
 
-同一份预设也会匹配 `https://api.minimaxi.com/v1`。`MiniMax-M3` 是 1,000,000 token 默认档；如果还要 204,800 token 的 `MiniMax-M2.7`，就保留它的模型项。
+`MiniMax-M3.1-Flash` and `MiniMax-M3` both have 1,000,000-token context windows and accept text, image, and video input. Use `https://api.minimax.io/v1` or `https://api.minimaxi.com/v1` for OpenAI-compatible requests. The corresponding Anthropic-compatible endpoints are `https://api.minimax.io/anthropic` and `https://api.minimaxi.com/anthropic`; mimo2codex itself expects the OpenAI-compatible endpoints.
 
 详见 [minimax.zh.md](./minimax.zh.md)（含 env-var 单实例写法 `GENERIC_FORCE_DEFAULT_MODEL=1`）。
 

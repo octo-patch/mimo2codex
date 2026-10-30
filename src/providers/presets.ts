@@ -61,7 +61,7 @@ export const PROVIDER_PRESETS: readonly ProviderPreset[] = [
     matchModelPrefix: ["minimax-", "abab"],
     recommendedSpec: {
       baseUrl: "https://api.minimax.io/v1",
-      defaultModel: "MiniMax-M3",
+      defaultModel: "MiniMax-M3.1-Flash",
       docsUrl: "https://platform.minimax.io/docs",
       features: {
         // 一键预设涵盖 dropNullStrict / dropNullContent / dropToolChoiceAuto /

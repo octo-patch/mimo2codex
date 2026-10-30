@@ -277,13 +277,13 @@ MiniMax rejects several fields that OpenAI / MiMo / DeepSeek accept. Use the `mi
 ```json
 {
   "id": "minimax",
-  "displayName": "MiniMax M3",
+  "displayName": "MiniMax M3.1 Flash",
   "baseUrl": "https://api.minimax.io/v1",
   "envKey": "MINIMAX_API_KEY",
-  "defaultModel": "MiniMax-M3",
+  "defaultModel": "MiniMax-M3.1-Flash",
   "models": [
-    { "id": "MiniMax-M3", "contextWindow": 1000000 },
-    { "id": "MiniMax-M2.7", "contextWindow": 204800 }
+    { "id": "MiniMax-M3.1-Flash", "contextWindow": 1000000, "supportsImages": true },
+    { "id": "MiniMax-M3", "contextWindow": 1000000, "supportsImages": true }
   ],
   "features": {
     "minimaxCompat": true,
@@ -292,7 +292,7 @@ MiniMax rejects several fields that OpenAI / MiMo / DeepSeek accept. Use the `mi
 }
 ```
 
-The same preset also matches `https://api.minimaxi.com/v1`. `MiniMax-M3` is the 1,000,000-token default; keep `MiniMax-M2.7` if you still need the 204,800-token catalog entry.
+`MiniMax-M3.1-Flash` and `MiniMax-M3` both have 1,000,000-token context windows and accept text, image, and video input. Use `https://api.minimax.io/v1` or `https://api.minimaxi.com/v1` for OpenAI-compatible requests. The corresponding Anthropic-compatible endpoints are `https://api.minimax.io/anthropic` and `https://api.minimaxi.com/anthropic`; mimo2codex itself expects the OpenAI-compatible endpoints.
 
 See [minimax.md](./minimax.md) for the full breakdown and the env-var single-instance flow (`GENERIC_FORCE_DEFAULT_MODEL=1`).
 

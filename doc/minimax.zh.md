@@ -41,13 +41,13 @@ Codex 还会以请求里 `config.toml` 配置的 model 名（如 `gpt-5.5`）作
   "providers": [
     {
       "id": "minimax",
-      "displayName": "MiniMax M3",
+      "displayName": "MiniMax M3.1 Flash",
       "baseUrl": "https://api.minimax.io/v1",
       "envKey": "MINIMAX_API_KEY",
-      "defaultModel": "MiniMax-M3",
+      "defaultModel": "MiniMax-M3.1-Flash",
       "models": [
-        { "id": "MiniMax-M3", "contextWindow": 1000000 },
-        { "id": "MiniMax-M2.7", "contextWindow": 204800 }
+        { "id": "MiniMax-M3.1-Flash", "contextWindow": 1000000, "supportsImages": true },
+        { "id": "MiniMax-M3", "contextWindow": 1000000, "supportsImages": true }
       ],
       "features": { "minimaxCompat": true, "forceParallelToolCalls": true }
     }
@@ -55,7 +55,7 @@ Codex 还会以请求里 `config.toml` 配置的 model 名（如 `gpt-5.5`）作
 }
 ```
 
-同一份配置也会匹配 `https://api.minimaxi.com/v1`。`MiniMax-M3` 是 1,000,000 token 默认档；如果还要用 204,800 token 的 `MiniMax-M2.7`，就保留它的模型项。
+`MiniMax-M3.1-Flash` and `MiniMax-M3` both have 1,000,000-token context windows and accept text, image, and video input. Use `https://api.minimax.io/v1` or `https://api.minimaxi.com/v1` for OpenAI-compatible requests. The corresponding Anthropic-compatible endpoints are `https://api.minimax.io/anthropic` and `https://api.minimaxi.com/anthropic`; mimo2codex itself expects the OpenAI-compatible endpoints.
 
 设环境变量并启动：
 ```bash
@@ -72,14 +72,14 @@ mimo2codex --model minimax
 ```bash
 export GENERIC_BASE_URL=https://api.minimax.io/v1
 export GENERIC_API_KEY=<your_key>
-export GENERIC_DEFAULT_MODEL=MiniMax-M3
-export GENERIC_FORCE_DEFAULT_MODEL=1   # 关键：未知模型名（如 "gpt-5.5"）自动改写到 MiniMax-M3
+export GENERIC_DEFAULT_MODEL=MiniMax-M3.1-Flash
+export GENERIC_FORCE_DEFAULT_MODEL=1   # Unknown client model ids rewrite to MiniMax-M3.1-Flash.
 mimo2codex
 ```
 
 ⚠️ **env-var 模式无法传 `features.minimaxCompat`**——想用严格模式开关请改用 providers.json。
 
-如果你还要 204,800 token 的 `MiniMax-M2.7`，请改用 providers.json 并在其中声明该模型项。
+Use providers.json to expose both current models in the catalog and their image-input metadata.
 
 ## 字段说明
 
